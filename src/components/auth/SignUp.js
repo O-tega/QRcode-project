@@ -1,12 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Qrcode from "../../public/Qrcode1.jpg";
 
-
-const SignIn = () => {
+const SignUp = () => {
 	const [email, setEmail] =
 		useState("");
 	const [password, setPassword] =
+		useState("");
+	const [firstName, setFirstName] =
+		useState("");
+	const [lastName, setLastName] =
 		useState("");
 	const [error, setError] =
 		useState("");
@@ -23,8 +26,15 @@ const SignIn = () => {
 		} else {
 			setEmail("");
 			setPassword("");
+			setFirstName("");
+			setLastName("");
 			setError("");
-			console.log(email, password);
+			console.log(
+				firstName,
+				lastName,
+				email,
+				password
+			);
 		}
 	};
 
@@ -33,12 +43,38 @@ const SignIn = () => {
 			<div className='flex justify-center mt-20'>
 				<div className='w-[760px] md:grid grid-cols-2'>
 					<div className='flex flex-col justify-center'>
-						<p className='py-5 font-bold text-[#b7747d] text-lg pl-5'>
-							SIGN-IN
+						<p className='py-5 font-bold text-sky-700 text-lg pl-5'>
+							SIGN-UP
 						</p>
 						<form
 							onSubmit={handleSubmit}>
 							<div className='flex flex-col px-5'>
+								<div className='mb-3 w-full'>
+									<TextField
+										id='Firstname'
+										label='First Name'
+										variant='outlined'
+										className='w-full'
+										onChange={(e) =>
+											setFirstName(
+												e.target.value
+											)
+										}
+									/>
+								</div>
+								<div className='mb-3 w-full'>
+									<TextField
+										id='lastname'
+										label='Last Name'
+										variant='outlined'
+										className='w-full'
+										onChange={(e) =>
+											setLastName(
+												e.target.value
+											)
+										}
+									/>
+								</div>
 								<div className='mb-3 w-full'>
 									<TextField
 										id='email'
@@ -67,7 +103,7 @@ const SignIn = () => {
 								</div>
 								<div>
 									<button className='rounded p-2 bg-sky-700 hover:bg-sky-900 w-full text-white text-lg font-medium'>
-										Login
+										Sign Up
 									</button>
 								</div>
 								<div className='text-xs text-red-500'>
@@ -81,7 +117,7 @@ const SignIn = () => {
 					<div className='hidden md:block'>
 						<img
 							src={Qrcode}
-							alt='QRcode Image'
+							alt='Qrcode image'
 							className='object-cover h-full'
 						/>
 					</div>
@@ -91,4 +127,4 @@ const SignIn = () => {
 	);
 };
 
-export default SignIn;
+export default SignUp;
