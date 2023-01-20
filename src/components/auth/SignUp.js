@@ -4,6 +4,12 @@ import Qrcode from "../../public/Qrcode1.jpg";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
+const validationSchema = yup.object({
+	firstName: yup.string().required("first name is required"),
+	lastName: yup.string().required("last name is required"),
+	email: yup.string().email("enter a valid email").required("Email is required")
+})
+
 const SignUp = () => {
 	// <Formik
 	// 	initialValues={{
@@ -145,6 +151,7 @@ const SignUp = () => {
 				JSON.stringify(values)
 			);
 		},
+		validationSchema: validationSchema
 	});
 	return (
 		<div>
@@ -164,6 +171,9 @@ const SignUp = () => {
 										variant='outlined'
 										className='w-full'
 										onChange={formik.handleChange}
+										onBlur={formik.handleBlur}
+										error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+										helperText={formik.touched.firstName && formik.errors.firstName}
 									/>
 								</div>
 								<div className='mb-3 w-full'>
@@ -173,7 +183,10 @@ const SignUp = () => {
 										label='Last Name'
 										variant='outlined'
 										className='w-full'
+										onBlur={formik.handleBlur}
 										onChange={formik.handleChange}
+										error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+										helperText={formik.touched.lastName && formik.errors.lastName}
 									/>
 								</div>
 								<div className='mb-3 w-full'>
@@ -183,7 +196,10 @@ const SignUp = () => {
 										label='Email'
 										variant='outlined'
 										className='w-full'
+										onBlur={formik.handleBlur}
 										onChange={formik.handleChange}
+										error={formik.touched.email && Boolean(formik.errors.email)}
+										helperText={formik.touched.email && formik.errors.email}
 									/>
 								</div>
 								<div className='mb-3 w-full'>
@@ -193,7 +209,10 @@ const SignUp = () => {
 										label='Password'
 										variant='outlined'
 										className='w-full'
+										onBlur={formik.handleBlur}
 										onChange={formik.handleChange}
+										error={formik.touched.password && Boolean(formik.errors.password)}
+										helperText={formik.touched.password && formik.errors.password}
 									/>
 								</div>
 								<div>
