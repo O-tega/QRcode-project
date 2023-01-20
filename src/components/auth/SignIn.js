@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-
+import TextField from "@mui/material/TextField";
+import Qrcode from "../../public/Qrcode1.jpg";
 
 
 const SignIn = () => {
@@ -65,7 +66,7 @@ const SignIn = () => {
 									/>
 								</div>
 								<div>
-									<button className='rounded p-2 bg-[#b7747d] hover:bg-[#9c5a5e] w-full text-white text-lg font-medium'>
+									<button className='rounded p-2 bg-sky-700 hover:bg-sky-900 w-full text-white text-lg font-medium'>
 										Login
 									</button>
 								</div>
@@ -79,8 +80,8 @@ const SignIn = () => {
 					{/* secod half of the grid */}
 					<div className='hidden md:block'>
 						<img
-							src={calender}
-							alt='Calender signin'
+							src={Qrcode}
+							alt='QRcode Image'
 							className='object-cover h-full'
 						/>
 					</div>
