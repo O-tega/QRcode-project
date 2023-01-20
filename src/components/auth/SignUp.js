@@ -3,6 +3,9 @@ import TextField from "@mui/material/TextField";
 import Qrcode from "../../public/Qrcode1.jpg";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import {createUserWithEmailAndPassword} from 'firebase/auth'
+import {auth} from '../../firebase/auth'
+
 
 const validationSchema = yup.object({
 	firstName: yup.string().required("first name is required"),
@@ -19,7 +22,13 @@ const SignUp = () => {
 			email: "",
 			password: "",
 		},
-		onSubmit: (values) => {
+		onSubmit: async (values) => {
+			await createUserWithEmailAndPassword(auth, values.email, values.password)
+			.then((userCredential)=>{
+				console.log(userCredential)
+			}).catch((e)=>{
+				console.log((e))
+			})
 			console.log(
 				JSON.stringify(values)
 			);
