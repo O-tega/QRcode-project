@@ -211,8 +211,8 @@ const SignUp = () => {
 										className='w-full'
 										onBlur={formik.handleBlur}
 										onChange={formik.handleChange}
-										error={formik.touched.password && Boolean(formik.errors.password)}
-										helperText={formik.touched.password && formik.errors.password}
+										error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+										helperText={formik.touched.firstName && formik.errors.firstName}
 									/>
 								</div>
 								<div>
