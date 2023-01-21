@@ -1,32 +1,35 @@
 import React, {useState} from 'react';
 import TextField from "@mui/material/TextField";
 import Qrcode from "../../public/Qrcode1.jpg";
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import {auth} from '../../firebase/auth'
+import {useFormik} from 'formik'
+import * as yup from 'yup'
+
+
+const validationSchema=yup.object({
+	email: yup.string().email("enter a valid email").required("Email is required"),
+	password: yup.string().required("password is required")
+})
 
 
 const SignIn = () => {
-	const [email, setEmail] =
-		useState("");
-	const [password, setPassword] =
-		useState("");
-	const [error, setError] =
-		useState("");
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		if (
-			email === "" &&
-			password === ""
-		) {
-			setError(
-				"please input email and password"
-			);
-		} else {
-			setEmail("");
-			setPassword("");
-			setError("");
-			console.log(email, password);
-		}
-	};
+	
+	const formik = useFormik({
+		initialValues:{
+			email:"",
+			password:""
+		},onSubmit:async (values)=>{
+			await signInWithEmailAndPassword(auth, values.email, values.password)
+			.then((userCredential)=>{
+				console.log(userCredential)
+			}).catch((e)=>{
+				console.log((e))
+			})
+			console.log(JSON.stringify(values))
+		},
+		validationSchema,
+	})
 
 	return (
 		<div>
@@ -37,41 +40,40 @@ const SignIn = () => {
 							SIGN-IN
 						</p>
 						<form
-							onSubmit={handleSubmit}>
+							onSubmit={formik.handleSubmit}>
 							<div className='flex flex-col px-5'>
 								<div className='mb-3 w-full'>
 									<TextField
 										id='email'
+										value={formik.values.email}
 										label='Email'
 										variant='outlined'
 										className='w-full'
-										onChange={(e) =>
-											setEmail(
-												e.target.value
-											)
-										}
+										onBlur={formik.handleBlur}
+										onChange={formik.handleChange}
+										error={formik.touched.email && Boolean(formik.errors.email)}
+										helperText={formik.touched.email && formik.errors.email}
 									/>
 								</div>
 								<div className='mb-3 w-full'>
 									<TextField
 										id='password'
+										value={formik.values.password}
 										label='Password'
 										variant='outlined'
 										className='w-full'
-										onChange={(e) =>
-											setPassword(
-												e.target.value
-											)
-										}
+										onBlur={formik.handleBlur}
+										onChange={formik.handleChange}
+										error={formik.touched.password && Boolean(formik.errors.password)}
+										helperText={formik.touched.password && formik.errors.password}
 									/>
 								</div>
 								<div>
-									<button className='rounded p-2 bg-sky-700 hover:bg-sky-900 w-full text-white text-lg font-medium'>
+									<button type="submit" className='rounded p-2 bg-sky-700 hover:bg-sky-900 w-full text-white text-lg font-medium'>
 										Login
 									</button>
 								</div>
 								<div className='text-xs text-red-500'>
-									{error}
 								</div>
 							</div>
 						</form>
