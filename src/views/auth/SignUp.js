@@ -4,7 +4,8 @@ import Qrcode from "../../public/Qrcode1.jpg";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import {createUserWithEmailAndPassword} from 'firebase/auth'
-import {auth} from '../../firebase/auth'
+import { auth } from "../../infrastructure/firebase/auth";
+// import { useNavigate } from "react-router-dom";
 
 
 const validationSchema = yup.object({
@@ -15,6 +16,7 @@ const validationSchema = yup.object({
 })
 
 const SignUp = () => {
+	// const navigate = useNavigate
 	const formik = useFormik({
 		initialValues: {
 			firstName: "",
@@ -23,15 +25,18 @@ const SignUp = () => {
 			password: "",
 		},
 		onSubmit: async (values) => {
-			await createUserWithEmailAndPassword(auth, values.email, values.password)
-			.then((userCredential)=>{
-				console.log(userCredential)
-			}).catch((e)=>{
-				console.log((e))
-			})
-			console.log(
-				JSON.stringify(values)
-			);
+			try{
+				await createUserWithEmailAndPassword(auth, values.email, values.password)
+				.then((userCredential)=>{
+						const user = userCredential.user
+						console.log(user)
+					}).catch((error)=>{
+						console.log(error)
+					})
+				console.log(JSON.stringify(values));
+			}catch(error){
+				console.log(error)
+			}
 		},
 		validationSchema: validationSchema
 	});
