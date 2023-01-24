@@ -7,4 +7,9 @@
     .sil{
         @apply px-4 hover:rounded-md hover:bg-[#68383b] py-1
     }
+
+    .form{
+        @apply my-2 w-96
+    }
 }
+
