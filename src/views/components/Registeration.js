@@ -1,8 +1,14 @@
 import React, { Fragment } from 'react'
 import { useFormik } from 'formik';
 import { TextField } from '@mui/material';
+// import CreateForm from '../../application/CreateForm'
+import { db } from '../../infrastructure/firebase/firebaseConfig';
+import { addDoc, collection } from 'firebase/firestore';
 
 const Registeration =()=>{
+
+    // const createForm = CreateForm()
+
     const formik = useFormik({
         initialValues:{
             email: "",
@@ -13,7 +19,14 @@ const Registeration =()=>{
         },
         onSubmit:(values)=>{
             console.log(values)
+            const collectionRef = collection(db, 'projectList')
+            addDoc(collectionRef, {values}).then(response=>{
+                console.log(response)
+            }).catch(error=>{
+                console.log(error)
+            })
         }
+
 
     }
     )
@@ -80,7 +93,7 @@ const Registeration =()=>{
                     <button type="submit" className='bg-sky-700 hover:bg-sky-900 w-full text-center text-white font-bold rounded py-2'> Submit </button>
 					</form>
 				</div>
-			</Fragment>
+			</Fragment> 
 		);
 }
 

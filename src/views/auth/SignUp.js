@@ -3,17 +3,25 @@ import TextField from "@mui/material/TextField";
 import Qrcode from "../../public/Qrcode1.jpg";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import {createUserWithEmailAndPassword} from 'firebase/auth'
-import { auth } from "../../infrastructure/firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../infrastructure/firebase/firebaseConfig";
 // import { useNavigate } from "react-router-dom";
 
-
 const validationSchema = yup.object({
-	firstName: yup.string().required("first name is required"),
-	lastName: yup.string().required("last name is required"),
-	email: yup.string().email("enter a valid email").required("Email is required"),
-	password: yup.string().required("Password is rewuired")
-})
+	firstName: yup
+		.string()
+		.required("first name is required"),
+	lastName: yup
+		.string()
+		.required("last name is required"),
+	email: yup
+		.string()
+		.email("enter a valid email")
+		.required("Email is required"),
+	password: yup
+		.string()
+		.required("Password is rewuired"),
+});
 
 const SignUp = () => {
 	// const navigate = useNavigate
@@ -25,20 +33,28 @@ const SignUp = () => {
 			password: "",
 		},
 		onSubmit: async (values) => {
-			try{
-				await createUserWithEmailAndPassword(auth, values.email, values.password)
-				.then((userCredential)=>{
-						const user = userCredential.user
-						console.log(user)
-					}).catch((error)=>{
-						console.log(error)
+			try {
+				await createUserWithEmailAndPassword(
+					auth,
+					values.email,
+					values.password
+				)
+					.then((userCredential) => {
+						const user =
+							userCredential.user;
+						console.log(user);
 					})
-				console.log(JSON.stringify(values));
-			}catch(error){
-				console.log(error)
+					.catch((error) => {
+						console.log(error);
+					});
+				console.log(
+					JSON.stringify(values)
+				);
+			} catch (error) {
+				console.log(error);
 			}
 		},
-		validationSchema: validationSchema
+		validationSchema: validationSchema,
 	});
 	return (
 		<div>
@@ -48,62 +64,143 @@ const SignUp = () => {
 						<p className='py-5 font-bold text-sky-700 text-lg pl-5'>
 							SIGN-UP
 						</p>
-						<form onSubmit={formik.handleSubmit}>
+						<form
+							onSubmit={
+								formik.handleSubmit
+							}>
 							<div className='flex flex-col px-5'>
 								<div className='mb-3 w-full'>
 									<TextField
 										id='firstName'
-										value={formik.values.firstName}
+										value={
+											formik.values
+												.firstName
+										}
 										label='First Name'
 										variant='outlined'
 										className='w-full'
-										onChange={formik.handleChange}
-										onBlur={formik.handleBlur}
-										error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-										helperText={formik.touched.firstName && formik.errors.firstName}
+										onChange={
+											formik.handleChange
+										}
+										onBlur={
+											formik.handleBlur
+										}
+										error={
+											formik.touched
+												.firstName &&
+											Boolean(
+												formik.errors
+													.firstName
+											)
+										}
+										helperText={
+											formik.touched
+												.firstName &&
+											formik.errors
+												.firstName
+										}
 									/>
 								</div>
 								<div className='mb-3 w-full'>
 									<TextField
 										id='lastName'
-										value={formik.values.lastName}
+										value={
+											formik.values
+												.lastName
+										}
 										label='Last Name'
 										variant='outlined'
 										className='w-full'
-										onBlur={formik.handleBlur}
-										onChange={formik.handleChange}
-										error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-										helperText={formik.touched.lastName && formik.errors.lastName}
+										onBlur={
+											formik.handleBlur
+										}
+										onChange={
+											formik.handleChange
+										}
+										error={
+											formik.touched
+												.lastName &&
+											Boolean(
+												formik.errors
+													.lastName
+											)
+										}
+										helperText={
+											formik.touched
+												.lastName &&
+											formik.errors
+												.lastName
+										}
 									/>
 								</div>
 								<div className='mb-3 w-full'>
 									<TextField
 										id='email'
-										value={formik.values.email}
+										value={
+											formik.values
+												.email
+										}
 										label='Email'
 										variant='outlined'
 										className='w-full'
-										onBlur={formik.handleBlur}
-										onChange={formik.handleChange}
-										error={formik.touched.email && Boolean(formik.errors.email)}
-										helperText={formik.touched.email && formik.errors.email}
+										onBlur={
+											formik.handleBlur
+										}
+										onChange={
+											formik.handleChange
+										}
+										error={
+											formik.touched
+												.email &&
+											Boolean(
+												formik.errors
+													.email
+											)
+										}
+										helperText={
+											formik.touched
+												.email &&
+											formik.errors
+												.email
+										}
 									/>
 								</div>
 								<div className='mb-3 w-full'>
 									<TextField
 										id='password'
-										value={formik.values.password}
+										value={
+											formik.values
+												.password
+										}
 										label='Password'
 										variant='outlined'
 										className='w-full'
-										onBlur={formik.handleBlur}
-										onChange={formik.handleChange}
-										error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-										helperText={formik.touched.firstName && formik.errors.firstName}
+										onBlur={
+											formik.handleBlur
+										}
+										onChange={
+											formik.handleChange
+										}
+										error={
+											formik.touched
+												.firstName &&
+											Boolean(
+												formik.errors
+													.firstName
+											)
+										}
+										helperText={
+											formik.touched
+												.firstName &&
+											formik.errors
+												.firstName
+										}
 									/>
 								</div>
 								<div>
-									<button type="submit" className='rounded p-2 bg-sky-700 hover:bg-sky-900 w-full text-white text-lg font-medium'>
+									<button
+										type='submit'
+										className='rounded p-2 bg-sky-700 hover:bg-sky-900 w-full text-white text-lg font-medium'>
 										Sign Up
 									</button>
 								</div>
