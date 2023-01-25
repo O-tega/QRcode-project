@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, } from "react-router-dom";
-import Qrcode from "../components/Qrcode";
-import Registeration from "../components/Registeration";
+import Qrcode from "./components/Qrcode";
+import Registeration from "./components/Registeration";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
 

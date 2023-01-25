@@ -2,7 +2,7 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import Qrcode from "../../public/Qrcode1.jpg";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../infrastructure/firebase/auth";
+import { auth } from "../../infrastructure/firebase/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -18,32 +18,41 @@ const validationSchema = yup.object({
 });
 
 const SignIn = () => {
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const formik = useFormik({
 		initialValues: {
 			email: "",
 			password: "",
 		},
 		onSubmit: async (values) => {
-			try{
+			try {
 				await signInWithEmailAndPassword(
 					auth,
 					values.email,
 					values.password
-				).then((userCredential)=>{
-					const user = userCredential.user
-					navigate('/signin')
-					console.log(user)
-				}).catch((error)=>{
-					const errorCode = error.code;
-					const errorMessage = error.message
-					console.log(errorCode, errorMessage)
-				})
-				console.log( JSON.stringify(values));
-			}catch(error){
-				console.log(error)
+				)
+					.then((userCredential) => {
+						const user =
+							userCredential.user;
+						navigate("/signin");
+						console.log(user);
+					})
+					.catch((error) => {
+						const errorCode =
+							error.code;
+						const errorMessage =
+							error.message;
+						console.log(
+							errorCode,
+							errorMessage
+						);
+					});
+				console.log(
+					JSON.stringify(values)
+				);
+			} catch (error) {
+				console.log(error);
 			}
-			
 		},
 		validationSchema,
 	});
