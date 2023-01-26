@@ -4,6 +4,7 @@ import Qrcode from "./components/Qrcode";
 import Registeration from "./components/Registeration";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
+import ProductInfoList from "./components/ProductInfoList";
 
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 				<Route path='/signin' element={<SignIn/>}/>
 				<Route path='/signup' element={<SignUp/>}/>
 				<Route path='/register' element={<Registeration />}/>
+				<Route path='/product-list' element={<ProductInfoList/>}/>
 			</Routes>
 		</div>
 	);
