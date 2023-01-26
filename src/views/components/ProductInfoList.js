@@ -1,9 +1,38 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../infrastructure/firebase/firebaseConfig';
+import Table from './DataTable';
 
 
 const ProductInfoList =()=>{
+    const columns = [
+			{
+				title: "Address",
+				dataIndex: "address",
+				key: "address",
+				render: (text) => <a>{text}</a>,
+			},
+			{
+				title: "email",
+				dataIndex: "email",
+				key: "email",
+			},
+			{
+				title: "Phone Number",
+				dataIndex: "phoneNumber",
+				key: "phoneNumber",
+			},
+			{
+				title: "Product",
+				key: "product",
+				dataIndex: "product",
+			},
+			{
+				title: "Serial Number",
+				key: "serialNumber",
+				dataIndex: "serialNumber",
+			},
+		];
 
     const [infoList, setInfoList] = useState([])
 
@@ -28,20 +57,16 @@ const ProductInfoList =()=>{
             console.log(error.message)
         })
     }
+    const dataList = infoList.map((info)=>(
+        info.data.values
+    ))
+    console.log(dataList)
 
     return(
         <Fragment>
-            <div className='text-center font-bold my-5 text-sky-700 text-3xl'>This is a product list page</div>
-
-            <div>
-                <ul>
-                    {infoList.map(info=>(
-                        <div className='flex'>
-                        <li key={info.id}>{info.data.values.product}</li>
-                        <li key={info.id}>{info.data.values.email}</li>
-                        </div>
-                    ))}
-                </ul>
+            <div className='text-center font-bold mt-5 text-white bg-sky-700 rounded mx-10 py-3 text-3xl'>PRODUCT INFORMATION LIST</div>
+            <div className='mx-10'>
+                <Table data={dataList} columns={columns}/>
             </div>
         </Fragment>
     )
