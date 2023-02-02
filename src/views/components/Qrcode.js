@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import QrScanner from "qr-scanner";
+import GeoLocation from "../../infrastructure/GeoLocation";
 
 const Qrcode = () => {
 	const [inputValue, setInputValue] = useState("");
@@ -82,6 +83,9 @@ const downloadQRcode = (e) => {
 					viewBox={`0 0 256 256`}
 					id='QRCode'
 				/>
+			</div>
+			<div className="justify-center flex">
+					<GeoLocation/>
 			</div>
 		</div>
 	);
