@@ -15,7 +15,8 @@ const Registeration =()=>{
             address:"",
             product:"",
             serialNumber:"",
-            phoneNumber:""
+            phoneNumber:"",
+            location:[]
         },
         onSubmit:(values)=>{
             console.log(values)

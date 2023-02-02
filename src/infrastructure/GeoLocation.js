@@ -37,7 +37,11 @@ const GeoLocation =()=>{
 
     },[])
 
-    return location
+    return (
+        <div>
+            longitude: {location.coordinates.lng} latitude: {location.coordinates.lat}
+        </div>
+    )
 }
 
 export default GeoLocation;
