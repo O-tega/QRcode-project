@@ -5,6 +5,7 @@ import Registeration from "./components/Registeration";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
 import ProductInfoList from "./components/ProductInfoList";
+import UpdateProduct from "./components/UpdateProduct";
 
 function App() {
 	return (
@@ -15,6 +16,7 @@ function App() {
 				<Route path='/signup' element={<SignUp/>}/>
 				<Route path='/register' element={<Registeration />}/>
 				<Route path='/product-list' element={<ProductInfoList/>}/>
+				<Route path='/update' element={<UpdateProduct/>}/>
 			</Routes>
 		</div>
 	);
