@@ -1,11 +1,9 @@
-import {
-	useEffect,
-	useState,
-} from "react";
+import { useEffect, useState } from "react";
+import { db } from "../../infrastructure/firebase/firebaseConfig";
+import { doc, addDoc, updateDoc, collection } from 'firebase/firestore'
+import { Firestore } from "firebase/firestore";
 
 const UpdateProduct = () => {
-	// const [latitude, setLatitude] = useState("")
-	// const [longitude, setLongitude]= useState("")
 	const [location, setLocation] =
 		useState([
 			{
@@ -30,7 +28,19 @@ const UpdateProduct = () => {
 				]);
 			}
 		);
+
+            // Get a reference to the firebase document to be editted
+
 	}, []);
+
+    useEffect(()=>{
+        const docRef = Firestore.collection('projectList').doc(id)
+        updateDoc(docRef).then((response)=>{
+            console.log(response.id)
+        }).catch(error=>{
+            console.log(error)
+        })
+    }, [])
 
 	return (
 		<div>

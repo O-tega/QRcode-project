@@ -19,10 +19,10 @@ const Registeration =()=>{
             location:[]
         },
         onSubmit:(values)=>{
-            console.log(values)
             const collectionRef = collection(db, 'projectList')
             addDoc(collectionRef, {values}).then(response=>{
                 console.log(response)
+                values.reset()
             }).catch(error=>{
                 console.log(error)
             })
