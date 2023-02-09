@@ -22,7 +22,6 @@ const Registeration =()=>{
             const collectionRef = collection(db, 'projectList')
             addDoc(collectionRef, {values}).then(response=>{
                 console.log(response)
-                values.reset()
             }).catch(error=>{
                 console.log(error)
             })
