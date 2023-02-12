@@ -1,9 +1,9 @@
 import React from 'react'
-import { Space,Table,Tag,} from "antd";
+import { Space,Table} from "antd";
 
 
 
-const DataTable = ({data, columns}) => (
+const DataTable = ({data, columns,}) => (
 	<Table
 		columns={columns}
 		dataSource={data}

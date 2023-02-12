@@ -18,9 +18,10 @@ const Registeration =()=>{
             phoneNumber:"",
             location:[]
         },
-        onSubmit:(values)=>{
+        onSubmit:async (values)=> {
+            console.log(values)
             const collectionRef = collection(db, 'projectList')
-            addDoc(collectionRef, {values}).then(response=>{
+            await addDoc(collectionRef, values).then(response=>{
                 console.log(response)
             }).catch(error=>{
                 console.log(error)

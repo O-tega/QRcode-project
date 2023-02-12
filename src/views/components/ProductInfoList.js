@@ -3,9 +3,16 @@ import { collection, getDocs, onSnapshot } from 'firebase/firestore'
 import { db } from '../../infrastructure/firebase/firebaseConfig';
 import Table from './DataTable';
 
+import { useNavigate } from 'react-router-dom';
+
 
 const ProductInfoList =()=>{
     const columns = [
+			{
+				title: "ID",
+				dataIndex: "ID",
+				key: "ID",
+			},
 			{
 				title: "Address",
 				dataIndex: "address",
@@ -31,10 +38,27 @@ const ProductInfoList =()=>{
 				title: "Serial Number",
 				key: "serialNumber",
 				dataIndex: "serialNumber",
+                tag: ["loser"]
+			},
+			{
+				title: "Tags",
+				key: "tags",
+				dataIndex: "tags",
+				render: () => (
+					<>
+						<button className='bg-blue-500 hover:bg-blue-700 text-white rounded p-2' >Details</button>
+					</>
+				),
 			},
 		];
 
     const [infoList, setInfoList] = useState([])
+    let navigate = useNavigate()
+
+    const routeChange=()=>{
+        let path = '/singleitem'
+        console.log("onClick")
+    }
 
     useEffect(()=>{
         prodInfoList()
@@ -64,16 +88,14 @@ const ProductInfoList =()=>{
             setInfoList(products)
         })
     }
+    console.log(infoList)
 
-    const dataList = infoList.map((info)=>(
-        info.values
-        ))
 
     return(
         <Fragment>
             <div className='text-center font-bold mt-5 text-white bg-sky-700 rounded mx-10 py-3 text-3xl'>PRODUCT INFORMATION LIST</div>
            <div className='mx-10'>
-                <Table key={dataList.email} data={dataList} columns={columns}/>
+                <Table  data={infoList} columns={columns} />
             </div>
         </Fragment>
     )
