@@ -18,7 +18,7 @@ function App() {
 				<Route path='/register' element={<Registeration />}/>
 				<Route path='/product-list' element={<ProductInfoList/>}/>
 				<Route path='/update' element={<UpdateProduct/>}/>
-				<Route path='/singleitem' element={<SingleItem/>}/>
+				<Route path='/singleitem/:id' element={<SingleItem/>}/>
 			</Routes>
 		</div>
 	);

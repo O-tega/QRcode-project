@@ -2,16 +2,19 @@ import React, { useState, useEffect, Fragment } from 'react';
 import {  onSnapshot,  doc } from 'firebase/firestore'
 import { db } from '../../infrastructure/firebase/firebaseConfig';
 import { Email } from '@mui/icons-material';
+import {useParams} from 'react-router-dom'
 
 
 const SingleItem=()=>{
+    const{id} = useParams()
+    console.log(id)
 
     const[email, setEmail] = useState("")
     const[location, setLocation] = useState({})
     const[latitude, setLatitude] = useState("")
     const[longitude, setLongitude] = useState("")
 
-    const docRef = doc(db, 'projectList', '4nN6wTtjcUQ5GfjEhGIg') 
+    const docRef = doc(db, 'projectList', id) 
 
     useEffect(()=>{
          onSnapshot(docRef, (doc) => {
