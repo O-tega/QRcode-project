@@ -48,52 +48,29 @@ const Qrcode = ({getId}) => {
 
 	return (
 		<div>
-			<p className='text-center text-sky-700 font-bold text-4xl px-10 pt-10'>
+			<p className='text-center text-sky-700 font-bold text-small px-10 pt-10 mt-24'>
 				QRCODE GENERATOR
 			</p>
 
+			<div className='my-5 flex justify-center'>
+				<QRCodeCanvas
+					size={200}
+					value={url}
+					viewBox={`0 0 256 256`}
+					id='QRCode'
+					
+				/>
+			</div>
 			<div className='my-10 justify-center flex'>
 				<form onSubmit={downloadQRcode}>
-					{/*<input
-						type='text'
-						className='border rounded-l'
-						onChange={(e) =>
-							setInputValue(
-								e.target.value
-							)
-						}
-					/>*/}
 					<button
 						type='submit'
 						value='Download'
-						className='bg-stone-400 text-sm font-bold text-white rounded-r px-1 hover:bg-stone-500 py-1'>
+						className='bg-sky-500 text-sm font-bold text-white rounded px-1 hover:bg-sky-700 py-1'>
 						Download
 					</button>
 				</form>
 			</div>
-			{/*<p className='text-center my-5'>
-				{inputValue}
-			</p>
-			<div className='flex justify-center pl-10 mb-12'>
-				<input
-					type='file'
-					onChange={(e) => readCode(e)}
-				/>
-			</div>
-			<p className='text-center text-blue-700 text-lg font-bold pb-12'>
-				{result}
-				</p>*/}
-			<div className='my-5 flex justify-center'>
-				<QRCodeCanvas
-					size={250}
-					value={url}
-					viewBox={`0 0 256 256`}
-					id='QRCode'
-				/>
-			</div>
-			{/*<div className='justify-center flex'>
-				<GeoLocation />
-					</div>*/}
 		</div>
 	);
 };
