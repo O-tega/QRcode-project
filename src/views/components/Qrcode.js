@@ -3,7 +3,13 @@ import { QRCodeCanvas } from "qrcode.react";
 import QrScanner from "qr-scanner";
 import GeoLocation from "../../infrastructure/GeoLocation";
 
-const Qrcode = () => {
+const Qrcode = ({getId}) => {
+	console.log(getId)
+	const urlall = window.location.href
+	const url = `${urlall.slice(0,-9)}/${getId}`
+	// const url = 
+	console.log(url) 
+	// console.log(window.location.href)
 	const [inputValue, setInputValue] =
 		useState("");
 	const [result, setResult] =
@@ -42,13 +48,13 @@ const Qrcode = () => {
 
 	return (
 		<div>
-			<p className='text-center text-red-800 font-bold text-4xl px-10'>
-				This is a new app
+			<p className='text-center text-sky-700 font-bold text-4xl px-10 pt-10'>
+				QRCODE GENERATOR
 			</p>
 
 			<div className='my-10 justify-center flex'>
 				<form onSubmit={downloadQRcode}>
-					<input
+					{/*<input
 						type='text'
 						className='border rounded-l'
 						onChange={(e) =>
@@ -56,7 +62,7 @@ const Qrcode = () => {
 								e.target.value
 							)
 						}
-					/>
+					/>*/}
 					<button
 						type='submit'
 						value='Download'
@@ -65,7 +71,7 @@ const Qrcode = () => {
 					</button>
 				</form>
 			</div>
-			<p className='text-center my-5'>
+			{/*<p className='text-center my-5'>
 				{inputValue}
 			</p>
 			<div className='flex justify-center pl-10 mb-12'>
@@ -76,18 +82,18 @@ const Qrcode = () => {
 			</div>
 			<p className='text-center text-blue-700 text-lg font-bold pb-12'>
 				{result}
-			</p>
-			<div className='my-10 flex justify-center'>
+				</p>*/}
+			<div className='my-5 flex justify-center'>
 				<QRCodeCanvas
 					size={250}
-					value={inputValue}
+					value={url}
 					viewBox={`0 0 256 256`}
 					id='QRCode'
 				/>
 			</div>
-			<div className='justify-center flex'>
+			{/*<div className='justify-center flex'>
 				<GeoLocation />
-			</div>
+					</div>*/}
 		</div>
 	);
 };

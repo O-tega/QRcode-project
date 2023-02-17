@@ -52,11 +52,6 @@ const DataTable = ({data}) => {
 						<>
 							<button onClick={()=>(setId(record.id), navigate(`/singleitem/${record.id}`))} className='bg-blue-500 hover:bg-blue-700 text-white rounded p-2' >Details</button>
 						</>
-					// <Space size='middle'>
-					// 	<a>
-					// 		Invite {record.lastName}
-					// 	</a>
-					// </Space>
 				)}
 			/>
 		</Table>

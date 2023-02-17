@@ -1,13 +1,15 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useFormik } from 'formik';
 import { TextField } from '@mui/material';
 // import CreateForm from '../../application/CreateForm'
 import { db } from '../../infrastructure/firebase/firebaseConfig';
 import { addDoc, collection } from 'firebase/firestore';
+import Qrcode from './Qrcode';
 
 const Registeration =()=>{
 
     // const createForm = CreateForm()
+    const [getId, setId] = useState("")
 
     const formik = useFormik({
         initialValues:{
@@ -22,7 +24,8 @@ const Registeration =()=>{
             console.log(values)
             const collectionRef = collection(db, 'projectList')
             await addDoc(collectionRef, values).then(response=>{
-                console.log(response)
+                console.log(response.id)
+                setId(response.id)
             }).catch(error=>{
                 console.log(error)
             })
@@ -94,6 +97,7 @@ const Registeration =()=>{
                     <button type="submit" className='bg-sky-700 hover:bg-sky-900 w-full text-center text-white font-bold rounded py-2'> Submit </button>
 					</form>
 				</div>
+                <Qrcode getId={getId}/>
 			</Fragment> 
 		);
 }
