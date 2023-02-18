@@ -13,12 +13,14 @@ const Registeration =()=>{
 
     const formik = useFormik({
         initialValues:{
+            name: "",
             email: "",
             address:"",
             product:"",
             serialNumber:"",
             phoneNumber:"",
-            location:[]
+            location:[], 
+            state:"safe"
         },
         onSubmit:async (values)=> {
             console.log(values)
@@ -41,6 +43,17 @@ const Registeration =()=>{
             <div className='text-center my-10 font-bold text-4xl text-sky-700'>Registeration</div>
             <div className='flex justify-center'>
                 <form onSubmit={formik.handleSubmit}>
+                <div className='form'>
+                    <TextField
+                        id='name'
+                        value={formik.values.name}
+                        label='Full name'
+                        variant='outlined'
+                        className='w-full'
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                    />
+                </div>
                 <div className='form'>
                     <TextField
                         id='email'
