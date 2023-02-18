@@ -47,7 +47,9 @@ const SingleItem=()=>{
             <p>{name}</p>
             <p>{product}</p>
         </div>
-        <Maps/>
+        <div className='flex justify-center mt-20'>
+            <Maps/>
+        </div>
         </Fragment>
     )
     
