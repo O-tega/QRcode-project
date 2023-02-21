@@ -62,7 +62,7 @@ const SignIn = () => {
 			<div className='flex justify-center mt-20'>
 				<div className='w-[760px] md:grid grid-cols-2'>
 					<div className='flex flex-col justify-center'>
-						<p className='py-5 font-bold text-[#b7747d] text-lg pl-5'>
+						<p className='py-5 font-bold text-sky-700 text-lg pl-5'>
 							SIGN-IN
 						</p>
 						<form
