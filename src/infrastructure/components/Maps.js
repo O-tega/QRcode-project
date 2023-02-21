@@ -1,12 +1,19 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { MapContainer as LeafletMap, Marker, TileLayer} from 'react-leaflet'
 import MapConfig from './MapConfig';
 import "leaflet/dist/leaflet.css"
 import L from 'leaflet';
 
 
-const Maps=()=>{
-    const[center, setCenter] = useState({lat:"7.290491", lng:"5.1514401"});
+const Maps=({lat, lng})=>{
+    let long =`${lng}`
+    let lati = `${lat}`
+	const loc = {lat,lng };
+	// console.log(loc)
+	// const [loading, setLoading]=useState(false)
+    const[center, setCenter] = useState(loc);
+	// const center = {lat, lng}
+    console.log(center)
     const ZOOM_LEVEL = 9
     const mapRef = useRef()
     const markerIcon = new L.Icon({
@@ -32,8 +39,11 @@ const Maps=()=>{
 						}
 					/>
 					<Marker
-						position={["7.290491", "5.1514401" ]}
-                        icon={markerIcon}
+						position={[
+							lat,
+							lng,
+						]}
+						icon={markerIcon}
 					/>
 				</LeafletMap>
 			</div>

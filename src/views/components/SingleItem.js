@@ -43,12 +43,12 @@ const SingleItem=()=>{
 
     return(
         <Fragment>
-        <div className='text-center font-bold text-2xl text-sky-700 flex-col'>
-            <p>{name}</p>
-            <p>{product}</p>
+        <div className='text-center font-bold text-2xl text-sky-700 flex-col mt-10'>
+            <p> Owner: {name}</p>
+            <p>Product name: {product}</p>
         </div>
-        <div className='flex justify-center mt-20'>
-            <Maps/>
+        <div className='flex justify-center mt-10'>
+            <Maps lat = {latitude} lng = {longitude}/>
         </div>
         </Fragment>
     )

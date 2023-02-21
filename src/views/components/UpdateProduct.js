@@ -13,9 +13,9 @@ const UpdateProduct = () => {
 	const [value, setValue] = useState("")
 	const [addrtype, setAddrtype] =
 		useState([
-			"Work",
-			"Home",
-			"school",
+			"safe",
+			"missing",
+			"stolen",
 		]);
 	const Add = addrtype.map(
 		(Add) => Add
@@ -44,7 +44,7 @@ const UpdateProduct = () => {
 		const docRef=doc(db, 'projectList', id)
 		await updateDoc(docRef, {
 			email,
-			location:({...location}),
+			// location:({...location}),
 			state: value,
 			name,
 
