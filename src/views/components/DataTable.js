@@ -16,9 +16,9 @@ const DataTable = ({data}) => {
 	return(
 		<Table dataSource={data}>
 			<Column
-				title='ID'
-				dataIndex='id'
-				key='id'
+				title='Name'
+				dataIndex='name'
+				key='name'
 			/>
 			<Column
 				title='Address'
@@ -50,7 +50,9 @@ const DataTable = ({data}) => {
 				key='action'
 				render={(_, record) => (
 						<>
-							<button onClick={()=>(setId(record.id), navigate(`/singleitem/${record.id}`))} className='bg-blue-500 hover:bg-blue-700 text-white rounded p-2' >Details</button>
+							<button onClick={()=>(setId(record.id), navigate(`/singleitem/${record.id}`))} className='bg-blue-500 hover:bg-blue-700 text-white rounded p-2 mr-2' >Details</button>
+
+							<button onClick={()=>(setId(record.id), navigate(`/update/${record.id}`))} className='bg-blue-500 hover:bg-blue-700 text-white rounded p-2' >update</button>
 						</>
 				)}
 			/>

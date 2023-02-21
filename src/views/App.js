@@ -7,6 +7,7 @@ import SignUp from "./auth/SignUp";
 import ProductInfoList from "./components/ProductInfoList";
 import UpdateProduct from "./components/UpdateProduct";
 import SingleItem from "./components/SingleItem";
+import SingleItemUser from "./components/SingleItemUser";
 
 function App() {
 	return (
@@ -17,8 +18,9 @@ function App() {
 				<Route path='/signup' element={<SignUp/>}/>
 				<Route path='/register' element={<Registeration />}/>
 				<Route path='/product-list' element={<ProductInfoList/>}/>
-				<Route path='/update' element={<UpdateProduct/>}/>
+				<Route path='/update/:id' element={<UpdateProduct/>}/>
 				<Route path='/singleitem/:id' element={<SingleItem/>}/>
+				<Route path='/:id' element={<SingleItemUser/>}/>
 			</Routes>
 		</div>
 	);

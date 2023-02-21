@@ -11,5 +11,10 @@
     .form{
         @apply my-2 w-96
     }
+    .leaflet-container{
+    @apply h-[400px] w-[600px] 
+    }
 }
+
+
 
