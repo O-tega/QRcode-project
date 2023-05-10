@@ -5,10 +5,13 @@ import "leaflet/dist/leaflet.css"
 import L from 'leaflet';
 
 
-const Maps=({lat, lng})=>{
-    let long =`${lng}`
-    let lati = `${lat}`
-	const loc = {lat,lng };
+const Maps=(props)=>{
+	console.log(props.lat, props.lng)
+	let lng = props.lng
+	let lat = props.lat
+    // let long =`${lng}`
+    // let lati = `${lat}`
+	const loc = {lat, lng };
 	// console.log(loc)
 	// const [loading, setLoading]=useState(false)
     const[center, setCenter] = useState(loc);
