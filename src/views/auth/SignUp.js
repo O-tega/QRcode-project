@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Qrcode from "../../public/Qrcode1.jpg";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import CircularProgress from '@mui/material/CircularProgress';
 import { auth } from "../../infrastructure/firebase/firebaseConfig";
 // import { useNavigate } from "react-router-dom";
 
@@ -23,7 +24,10 @@ const validationSchema = yup.object({
 		.required("Password is rewuired"),
 });
 
+
+
 const SignUp = () => {
+	const [isLoading, setLoading] = useState(false);
 	// const navigate = useNavigate
 	const formik = useFormik({
 		initialValues: {
@@ -37,9 +41,10 @@ const SignUp = () => {
 				await createUserWithEmailAndPassword(
 					auth,
 					values.email,
-					values.password
+					values.password,
 				)
 					.then((userCredential) => {
+						setLoading(true);
 						const user =
 							userCredential.user;
 						console.log(user);
@@ -55,7 +60,8 @@ const SignUp = () => {
 			}
 		},
 		validationSchema: validationSchema,
-	});
+	},
+	setLoading(false));
 	return (
 		<div>
 			<div className='flex justify-center mt-20'>
@@ -201,7 +207,7 @@ const SignUp = () => {
 									<button
 										type='submit'
 										className='rounded p-2 bg-sky-700 hover:bg-sky-900 w-full text-white text-lg font-medium'>
-										Sign Up
+										{isLoading? <CircularProgress color="primary" size={20}/>: <p>Sign Up</p> }
 									</button>
 								</div>
 								<div className='text-xs text-red-500'></div>

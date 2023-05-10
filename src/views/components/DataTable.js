@@ -46,6 +46,11 @@ const DataTable = ({data}) => {
 				key='product'
 			/>
 			<Column
+				title='State'
+				dataIndex='state'
+				key='state'
+			/>
+			<Column
 				title='Product details'
 				key='action'
 				render={(_, record) => (
