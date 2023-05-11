@@ -4,13 +4,14 @@ import { db } from '../../infrastructure/firebase/firebaseConfig';
 import Table from './DataTable';
 
 import { useNavigate } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 const ProductInfoList =()=>{
 
     const navigate = useNavigate();
 
-
+    const [isLoading, setLoading] = useState(false)
     const [infoList, setInfoList] = useState([])
 
     useEffect(()=>{
@@ -21,6 +22,7 @@ const ProductInfoList =()=>{
     const prodInfoList = ()=>{
         const productCollectionRef = collection(db, 'projectList')
         onSnapshot(productCollectionRef, (snapshot)=>{
+            setLoading(true)
             let products =[]
 			let docId = []
 			let newProduct;
@@ -32,10 +34,10 @@ const ProductInfoList =()=>{
             })
 			console.log(docId)
             setInfoList(newProduct)
+            setLoading(false)
         })
     }
     console.log(infoList)
-    // infoList.map()
     const idList = []
     infoList.map(id=>(
         idList.push(id.id)
@@ -47,7 +49,7 @@ const ProductInfoList =()=>{
         <Fragment>
             <div className='text-center font-bold mt-5 text-white bg-sky-700 rounded mx-10 py-3 text-3xl'>PRODUCT INFORMATION LIST</div>
            <div className='mx-10'>
-                <Table  data={infoList} />
+                <Table key={infoList.id} data={infoList} />
             </div>
         </Fragment>
     )
