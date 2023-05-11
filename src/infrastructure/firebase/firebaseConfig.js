@@ -1,7 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, collection } from 'firebase/firestore'
+import { createContext, useContext, useEffect, useState } from "react";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -29,3 +30,22 @@ export const db = getFirestore(app)
 
 // initialize collectionRef
 export const CollectionRef = collection(db, 'projectList')
+
+export const AuthContext = createContext()
+
+export const AuthContextProvider = props => {
+	const [user, setUser] = useState()
+	const [error, setError] = useState()
+
+	useEffect(()=>{
+		const unsubscribe = onAuthStateChanged(getAuth(), setUser, setError)
+		return ()=> unsubscribe()
+	}, [])
+	return <AuthContext.Provider value = {{user, error}} {...props}/>
+}
+
+
+export const useAuthState = () => {
+	const auth = useContext(AuthContext)
+	return {...auth, isAuthenticated: auth.user != null}
+};

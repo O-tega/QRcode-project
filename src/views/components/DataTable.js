@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const { Column} = Table;
 
 
-const DataTable = ({data}) => {
+const DataTable = ({data, key}) => {
 
 	const navigate = useNavigate()
 
@@ -14,7 +14,7 @@ const DataTable = ({data}) => {
 	console.log(id)
 
 	return(
-		<Table dataSource={data}>
+		<Table key={key} dataSource={data}>
 			<Column
 				title='Name'
 				dataIndex='name'

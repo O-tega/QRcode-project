@@ -7,9 +7,7 @@ const Qrcode = ({getId}) => {
 	console.log(getId)
 	const urlall = window.location.href
 	const url = `${urlall.slice(0,-9)}/${getId}`
-	// const url = 
 	console.log(url) 
-	// console.log(window.location.href)
 	const [inputValue, setInputValue] =
 		useState("");
 	const [result, setResult] =

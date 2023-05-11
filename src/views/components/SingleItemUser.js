@@ -19,23 +19,6 @@ const SingleItemUser = () => {
 		},
 	]);
 
-	// const handleSubmit = async (e) => {
-	// 	e.preventDefault();
-	// 	setLoading(true);
-	// 	console.log(id);
-	// 	console.log(location);
-	// 	const docRef = doc(db, 'projectList', id);
-	// 	await updateDoc(docRef, {
-	// 		location: location,
-	// 	})
-	// 		.then((response) => {
-	// 			console.log(response);
-	// 		})
-	// 		.catch((error) => console.log(error));
-
-	// 	setLoading(false);
-	// };
-
 	const docRef = doc(db, 'projectList', id);
 
 	useEffect(() => {

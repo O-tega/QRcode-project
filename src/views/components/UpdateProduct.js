@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import { db } from '../../infrastructure/firebase/firebaseConfig';
-import { doc, addDoc, updateDoc, collection, setDoc } from 'firebase/firestore';
-import { Firestore } from 'firebase/firestore';
-import { TextField } from '@mui/material';
+import { doc, updateDoc} from 'firebase/firestore';
 import CircularProgress from '@mui/material/CircularProgress';
-import NewSelect from '../../infrastructure/components/Select';
 import { useParams } from 'react-router-dom';
 
 const UpdateProduct = () => {
@@ -17,20 +14,11 @@ const UpdateProduct = () => {
 	const Add = addrtype.map((Add) => Add);
 	const handleAddrTypeChange = (e) => setValue(addrtype[e.target.value]);
 
-	// console.log(
-	// 	addrtype[e.target.value]
-	// 	)
-
 	const [location, setLocation] = useState([{
 		latitude: '',
 		longitude: '',
 	}]);
-	const [name, setName] = useState('');
-	// const [email, setEmail] = useState('');
 
-	// const handleClick=()=>{
-	// 	setLoading(true)
-	// }
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
