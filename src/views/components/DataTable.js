@@ -36,14 +36,14 @@ const DataTable = ({data, key}) => {
 				key='phoneNumber'
 			/>
 			<Column
-				title='Serial Number'
-				dataIndex='serialNumber'
-				key='serialNumber'
+				title='Matric Number'
+				dataIndex='matricNumber'
+				key='matricNumber'
 			/>
 			<Column
-				title='Product'
-				dataIndex='product'
-				key='product'
+				title='Department'
+				dataIndex='department'
+				key='department'
 			/>
 			<Column
 				title='State'

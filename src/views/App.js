@@ -10,6 +10,7 @@ import SingleItem from './components/SingleItem';
 import SingleItemUser from './components/SingleItemUser';
 import { AuthContextProvider, useAuthState } from '../infrastructure/firebase/firebaseConfig';
 import PrivateRoutes from '../infrastructure/firebase/privateRoutes';
+import Profile from './components/Profile';
 
 function App() {
 	return (
@@ -19,9 +20,10 @@ function App() {
 					<Route path='/' element={<Qrcode />} />
 					<Route path='/signin' element={<SignIn />} />
 					<Route path='/signup' element={<SignUp />} />
+					<Route path='/profile' element={<Profile />} />
+					<Route path='/product-list' element={<ProductInfoList />} />
 					<Route element={<PrivateRoutes />}>
 						<Route path='/register' element={<Registeration />} />
-						<Route path='/product-list' element={<ProductInfoList />} />
 						<Route path='/update/:id' element={<UpdateProduct />} />
 						<Route path='/singleitem/:id' element={<SingleItem />} />
 					</Route>

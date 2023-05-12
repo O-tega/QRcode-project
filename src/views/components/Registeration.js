@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react'
+import {Outlet} from 'react-router-dom'
 import { useFormik } from 'formik';
 import { TextField } from '@mui/material';
 // import CreateForm from '../../application/CreateForm'
@@ -18,8 +19,8 @@ const Registeration =()=>{
             name: "",
             email: "",
             address:"",
-            product:"",
-            serialNumber:"",
+            department:"",
+            matricNumber:"",
             phoneNumber:"",
             location:[], 
             state:"safe"
@@ -35,12 +36,6 @@ const Registeration =()=>{
             }catch(error){
                 console.log(error)
             }
-            // await addDoc(collectionRef, values).then(response=>{
-            //     console.log(response.id)
-            //     setId(response.id)
-            // }).catch(error=>{
-            //     console.log(error)
-            // })
             setLoading(false)
         }
 
@@ -89,9 +84,9 @@ const Registeration =()=>{
 								</div>
 								<div className='form'>
 									<TextField
-										id='product'
-										value={formik.values.product}
-										label='Product'
+										id='department'
+										value={formik.values.department}
+										label='Department'
 										variant='outlined'
 										className='w-full'
 										onBlur={formik.handleBlur}
@@ -100,9 +95,9 @@ const Registeration =()=>{
 								</div>
 								<div className='form'>
 									<TextField
-										id='serialNumber'
-										value={formik.values.serialNumber}
-										label='Product serialnumber'
+										id='matricNumber'
+										value={formik.values.matricNumber}
+										label='Matric Number (e.g. IFT/00/000)'
 										variant='outlined'
 										className='w-full'
 										onBlur={formik.handleBlur}
@@ -129,6 +124,7 @@ const Registeration =()=>{
 						</div>
 					</div>
 					<Qrcode getId={getId} />
+					<Outlet/>
 				</div>
 			</Fragment>
 		);

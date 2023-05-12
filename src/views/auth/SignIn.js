@@ -28,7 +28,7 @@ const SignIn = () => {
 				const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
 				const user = userCredential.user;
 
-				navigate('/product-list')
+				navigate('/register')
 				console.log(user)
 			
 				console.log(JSON.stringify(values));
