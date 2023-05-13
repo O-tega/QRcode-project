@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
+import { useNavigate } from 'react-router-dom';
 import Qrcode from '../../public/Qrcode1.jpg';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -18,6 +19,7 @@ const validationSchema = yup.object({
 const SignUp = () => {
 	const [isError, setError] = useState('');
 	const [isLoading, setLoading] = useState(false);
+	const navigate = useNavigate();
 	const formik = useFormik({
 		initialValues: {
 			firstName: '',
@@ -30,7 +32,7 @@ const SignUp = () => {
 			try {
 				const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password) 	
 				const user = userCredential.user
-
+				navigate('/register');
 				console.log(user)
 
 				console.log(JSON.stringify(values));

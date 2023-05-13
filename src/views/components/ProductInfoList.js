@@ -9,8 +9,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const ProductInfoList =()=>{
 
-    const navigate = useNavigate();
-
     const [isLoading, setLoading] = useState(false)
     const [infoList, setInfoList] = useState([])
 
@@ -38,7 +36,7 @@ const ProductInfoList =()=>{
         })
     }
     console.log(infoList)
-    const idList = []
+    const idList = [] 
     infoList.map(id=>(
         idList.push(id.id)
     ))

@@ -9,14 +9,8 @@ const Maps=(props)=>{
 	console.log(props.lat, props.lng)
 	let lng = props.lng
 	let lat = props.lat
-    // let long =`${lng}`
-    // let lati = `${lat}`
 	const loc = {lat, lng };
-	// console.log(loc)
-	// const [loading, setLoading]=useState(false)
     const[center, setCenter] = useState(loc);
-	// const center = {lat, lng}
-    console.log(center)
     const ZOOM_LEVEL = 9
     const mapRef = useRef()
     const markerIcon = new L.Icon({
@@ -24,8 +18,6 @@ const Maps=(props)=>{
         iconSize: [35, 45],
 
     })
-
-
 
     return (
 			<div className='leaflet-container'>

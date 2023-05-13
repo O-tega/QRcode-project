@@ -1,33 +1,27 @@
-import React, { useState } from "react";
-import { QRCodeCanvas } from "qrcode.react";
-import QrScanner from "qr-scanner";
-import GeoLocation from "../../infrastructure/GeoLocation";
+import React, { useState } from 'react';
+import { QRCodeCanvas } from 'qrcode.react';
+import QrScanner from 'qr-scanner';
+import GeoLocation from '../../infrastructure/GeoLocation';
 
-const Qrcode = ({getId}) => {
-	console.log(getId)
-	const urlall = window.location.href
-	const url = `${urlall.slice(0,-9)}/${getId}`
-	console.log(url) 
-	const [inputValue, setInputValue] =
-		useState("");
-	const [result, setResult] =
-		useState("");
+const Qrcode = ({ getId }) => {
+	console.log(getId);
+	const urlall = window.location.href;
+	const url = `${urlall.slice(0, -9)}/${getId}`;
+	console.log(url);
+	const [inputValue, setInputValue] = useState('');
+	const [result, setResult] = useState('');
 
 	const downloadQRcode = (e) => {
 		e.preventDefault();
-		let canvas =
-			document.querySelector("canvas");
-		let image = canvas.toDataURL(
-			"image/png"
-		);
-		let anchor =
-			document.createElement("a");
+		let canvas = document.querySelector('canvas');
+		let image = canvas.toDataURL('image/png');
+		let anchor = document.createElement('a');
 		anchor.href = image;
 		anchor.download = `qr-code.png`;
 		document.body.appendChild(anchor);
 		anchor.click();
 		document.body.removeChild(anchor);
-		setInputValue("");
+		setInputValue('');
 	};
 
 	const readCode = (e) => {
@@ -38,9 +32,7 @@ const Qrcode = ({getId}) => {
 		QrScanner.scanImage(file, {
 			returnDetailedScanResult: true,
 		})
-			.then((result) =>
-				setResult(result.data)
-			)
+			.then((result) => setResult(result.data))
 			.catch((e) => console.log(e));
 	};
 
@@ -51,13 +43,7 @@ const Qrcode = ({getId}) => {
 			</p>
 
 			<div className='my-5 flex justify-center'>
-				<QRCodeCanvas
-					size={200}
-					value={url}
-					viewBox={`0 0 256 256`}
-					id='QRCode'
-					
-				/>
+				<QRCodeCanvas size={200} value={url} viewBox={`0 0 256 256`} id='QRCode' />
 			</div>
 			<div className='my-10 justify-center flex'>
 				<form onSubmit={downloadQRcode}>
