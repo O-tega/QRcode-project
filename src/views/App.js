@@ -17,13 +17,12 @@ function App() {
 		<AuthContextProvider>
 			<div>
 				<Routes>
-					<Route path='/' element={<Qrcode />} />
 					<Route path='/signin' element={<SignIn />} />
 					<Route path='/signup' element={<SignUp />} />
-					<Route path='/profile' element={<Profile />} />
 					<Route path='/product-list' element={<ProductInfoList />} />
+					<Route path='/register' element={<Registeration />} />
 					<Route element={<PrivateRoutes />}>
-						<Route path='/register' element={<Registeration />} />
+						<Route path='/' element={<Profile />} />
 						<Route path='/update/:id' element={<UpdateProduct />} />
 						<Route path='/singleitem/:id' element={<SingleItem />} />
 					</Route>

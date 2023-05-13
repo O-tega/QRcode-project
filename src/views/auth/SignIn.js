@@ -28,7 +28,7 @@ const SignIn = () => {
 				const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
 				const user = userCredential.user;
 
-				navigate('/register')
+				navigate('/product-list')
 				console.log(user)
 			
 				console.log(JSON.stringify(values));
@@ -81,7 +81,10 @@ const SignIn = () => {
 										className='rounded p-2 bg-sky-700 hover:bg-sky-900 w-full text-white text-lg font-medium'>
 										{isLoading ? <CircularProgress color='primary' size={20} /> : <p> Login </p>}
 									</button>
-									<div>{isError ? <p className='text-xs text-red-500'>{isError}</p> : ''}</div>
+									<div>{isError ? <div><span className='text-xs text-red-500 py-1'>
+									{isError} </span>
+									<span><a className='text-blue-500' href="/signup"> Signup</a></span>
+									</div> : ''}</div>
 								</div>
 								<div className='text-xs text-red-500'></div>
 							</div>

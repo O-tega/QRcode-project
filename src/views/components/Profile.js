@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
+
 const Profile = ({ getId }) => {
 
 
 	return (
 		<div>
-			<div className='  flex flex-col font-medium items-center justify-center h-screen'>
-				<p className='text-center text-[#20354b] font-bold text-xl px-10 py-3 pt-10 '>PROFILE</p>
+			<div className=' bg-[#071e34] flex flex-col font-medium items-center justify-center h-screen'>
+				<p className='text-center text-white font-bold text-xl px-10 py-3 pt-10 '>PROFILE</p>
 				<section className='w-64 mx-auto bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg'>
 					<div className='flex items-center justify-between'>
 						<span className='text-gray-400 text-sm'>IFT/16/0116</span>
