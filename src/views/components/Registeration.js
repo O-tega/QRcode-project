@@ -56,6 +56,7 @@ const Registeration = () => {
 	console.log(error);
 	const getEmail1 = infoList.find((list) => list.email == input);
 
+	// Set to allow info from the db to render then set mail
 	setTimeout(() => setGetemail(getEmail1.email), 50);
 
 	console.log(getEmail);
