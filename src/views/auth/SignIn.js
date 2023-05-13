@@ -1,8 +1,10 @@
-import React, {useCallback, useState} from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Qrcode from '../../public/Qrcode1.jpg';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../infrastructure/firebase/firebaseConfig';
+import { addDoc, collection, onSnapshot } from 'firebase/firestore';
+import { db } from '../../infrastructure/firebase/firebaseConfig';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -14,9 +16,18 @@ const validationSchema = yup.object({
 });
 
 const SignIn = () => {
-	const [isError, setError] = useState("")
-	const [isLoading, setLoading] = useState()
+	const [isError, setError] = useState('');
+	const [getId, setId] = useState('');
+	const[input, setInput] = useState("")
+	const [getEmail, setGetemail] = useState('');
+	const [infoList, setInfoList] = useState([]);
+	const [isLoading, setLoading] = useState();
 	const navigate = useNavigate();
+
+	const handleInput=(e)=>{
+		setInput(e.target.value)
+	}
+
 	const formik = useFormik({
 		initialValues: {
 			email: '',
@@ -25,21 +36,58 @@ const SignIn = () => {
 		onSubmit: useCallback(async (values) => {
 			setLoading(true);
 			try {
-				const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
+				const userCredential = await signInWithEmailAndPassword(
+					auth,
+					values.email,
+					values.password
+				);
 				const user = userCredential.user;
 
-				navigate('/product-list')
-				console.log(user)
-			
+				navigate(`/${getId}`);
+				console.log(user);
+
 				console.log(JSON.stringify(values));
 			} catch (error) {
 				console.log(error);
-				setError(error.message)
+				setError(error.message);
 			}
 			setLoading(false);
 		}),
 		validationSchema,
 	});
+
+	const getEmail1 = infoList.find((list) => list.email == input);
+
+	setTimeout(() => setId(getEmail1.id), 50);
+	setTimeout(() => setGetemail(getEmail1.email), 50);
+
+	console.log(getId);
+	console.log(getEmail);
+	
+
+	useEffect(() => {
+		prodInfoList();
+	}, []);
+
+	console.log(infoList);
+
+	const prodInfoList = () => {
+		const productCollectionRef = collection(db, 'projectList');
+		onSnapshot(productCollectionRef, (snapshot) => {
+			setLoading(true);
+			let products = [];
+			let docId = [];
+			let newProduct;
+			snapshot.docs.forEach((doc) => {
+				docId.push({ id: doc.id });
+				products.push({ ...doc.data() });
+				return (newProduct = docId.map((id, index) => ({ ...id, ...products[index] })));
+			});
+			console.log(docId);
+			setInfoList(newProduct);
+			setLoading(false);
+		});
+	};
 
 	return (
 		<div>
@@ -58,6 +106,7 @@ const SignIn = () => {
 										className='w-full'
 										onBlur={formik.handleBlur}
 										onChange={formik.handleChange}
+										onInput={handleInput}
 										error={formik.touched.email && Boolean(formik.errors.email)}
 										helperText={formik.touched.email && formik.errors.email}
 									/>
@@ -81,10 +130,21 @@ const SignIn = () => {
 										className='rounded p-2 bg-sky-700 hover:bg-sky-900 w-full text-white text-lg font-medium'>
 										{isLoading ? <CircularProgress color='primary' size={20} /> : <p> Login </p>}
 									</button>
-									<div>{isError ? <div><span className='text-xs text-red-500 py-1'>
-									{isError} </span>
-									<span><a className='text-blue-500' href="/signup"> Signup</a></span>
-									</div> : ''}</div>
+									<div>
+										{isError ? (
+											<div>
+												<span className='text-xs text-red-500 py-1'>{isError} </span>
+												<span>
+													<a className='text-blue-500' href='/signup'>
+														{' '}
+														Signup
+													</a>
+												</span>
+											</div>
+										) : (
+											''
+										)}
+									</div>
 								</div>
 								<div className='text-xs text-red-500'></div>
 							</div>

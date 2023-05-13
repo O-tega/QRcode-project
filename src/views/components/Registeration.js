@@ -13,10 +13,15 @@ const Registeration = () => {
 	// const createForm = CreateForm()
 	const navigate = useNavigate();
 	const [error, setError] = useState('');
+	const [input, setInput] = useState('');
 	const [getId, setId] = useState('');
 	const [getEmail, setGetemail] = useState('');
 	const [infoList, setInfoList] = useState([]);
 	const [isLoading, setLoading] = useState(false);
+
+	const handleInput = (e) => {
+		setInput(e.target.value);
+	};
 
 	const formik = useFormik({
 		initialValues: {
@@ -32,7 +37,7 @@ const Registeration = () => {
 		onSubmit: async (values) => {
 			console.log(values);
 			setLoading(true);
-			console.log(getEmail)
+			console.log(getEmail);
 			if (values.email != getEmail) {
 				try {
 					const collectionRef = collection(db, 'projectList');
@@ -49,18 +54,18 @@ const Registeration = () => {
 		},
 	});
 	console.log(error);
-	const getEmail1 = infoList.find((list) => list.email == 'tega.myview@gmail.com');
+	const getEmail1 = infoList.find((list) => list.email == input);
 
-	setTimeout(()=>(setGetemail(getEmail1.email)), 50)
+	setTimeout(() => setGetemail(getEmail1.email), 50);
 
-	console.log(getEmail)
-
+	console.log(getEmail);
+	console.log(input)
 
 	useEffect(() => {
 		prodInfoList();
 	}, []);
-	
-		console.log(infoList);
+
+	console.log(infoList);
 
 	const prodInfoList = () => {
 		const productCollectionRef = collection(db, 'projectList');
@@ -102,6 +107,7 @@ const Registeration = () => {
 									id='email'
 									value={formik.values.email}
 									label='Email'
+									onInput={handleInput}
 									variant='outlined'
 									className='w-full'
 									onBlur={formik.handleBlur}
