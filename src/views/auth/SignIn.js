@@ -43,7 +43,7 @@ const SignIn = () => {
 				);
 				const user = userCredential.user;
 
-				navigate(`/${getId}`);
+				navigate(`/profile/${getId}`);
 				console.log(user);
 
 				console.log(JSON.stringify(values));

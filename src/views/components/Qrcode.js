@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 import QrScanner from 'qr-scanner';
+import { useNavigate } from 'react-router-dom'
 import GeoLocation from '../../infrastructure/GeoLocation';
 
 const Qrcode = ({ getId }) => {
+	const navigate = useNavigate()
 	console.log(getId);
 	const urlall = window.location.href;
 	const url = `${urlall.slice(0, -9)}/${getId}`;
@@ -22,6 +24,7 @@ const Qrcode = ({ getId }) => {
 		anchor.click();
 		document.body.removeChild(anchor);
 		setInputValue('');
+		navigate('/signin')
 	};
 
 	const readCode = (e) => {
@@ -51,7 +54,7 @@ const Qrcode = ({ getId }) => {
 						type='submit'
 						value='Download'
 						className='bg-sky-500 text-sm font-bold text-white rounded px-1 hover:bg-sky-700 py-1'>
-						Download
+						Download & Signin
 					</button>
 				</form>
 			</div>

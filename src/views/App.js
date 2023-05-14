@@ -20,13 +20,14 @@ function App() {
 					<Route path='/signin' element={<SignIn />} />
 					<Route path='/signup' element={<SignUp />} />
 					<Route path='/product-list' element={<ProductInfoList />} />
-					<Route element={<PrivateRoutes />}>
 					<Route path='/register' element={<Registeration />} />
-						<Route path='/:id' element={<Profile />} />
+					<Route path='/:id' element={<SingleItemUser />} />
+					<Route element={<PrivateRoutes />}>
+						<Route path='/profile/:id' element={<Profile />} />
+						<Route path='/qrcode' element={<Qrcode />} />
 						<Route path='/update/:id' element={<UpdateProduct />} />
 						<Route path='/singleitem/:id' element={<SingleItem />} />
 					</Route>
-					<Route path='/:id' element={<SingleItemUser />} />
 				</Routes>
 			</div>
 		</AuthContextProvider>
