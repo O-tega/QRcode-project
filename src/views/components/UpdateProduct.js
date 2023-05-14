@@ -14,21 +14,21 @@ const UpdateProduct = () => {
 	const Add = addrtype.map((Add) => Add);
 	const handleAddrTypeChange = (e) => setValue(addrtype[e.target.value]);
 
-	const [location, setLocation] = useState([{
-		latitude: '',
-		longitude: '',
-	}]);
+	// const [location, setLocation] = useState([{
+	// 	latitude: '',
+	// 	longitude: '',
+	// }]);
 
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true)
 		console.log(id);
-		console.log(location);
+		// console.log(location);
 		console.log(value);
 		const docRef = doc(db, 'projectList', id);
 		await updateDoc(docRef, {
-			location: location,
+			// location: location,
 			state: value,
 		})
 			.then((response) => {
@@ -40,20 +40,20 @@ const UpdateProduct = () => {
 	};
 
 
-	useEffect(() => {
-		navigator.geolocation.getCurrentPosition((position) => {
-			setLocation(
-				{
-					latitude: position.coords.latitude,
-					longitude: position.coords.longitude,
-				},
-			);
-		});
+	// useEffect(() => {
+	// 	navigator.geolocation.getCurrentPosition((position) => {
+	// 		setLocation(
+	// 			{
+	// 				latitude: position.coords.latitude,
+	// 				longitude: position.coords.longitude,
+	// 			},
+	// 		);
+	// 	});
 
-		// Get a reference to the firebase document to be editted
-	}, []);
+	// 	// Get a reference to the firebase document to be editted
+	// }, []);
 
-	console.log(location);
+	// console.log(location);
 
 	// updateDoc(docRef, {
 	// 	location:"update location"
@@ -79,11 +79,6 @@ const UpdateProduct = () => {
 						{isLoading ? <CircularProgress color="primary" size={20} className='text-white'/> : <span>submit</span>}
 					</button>
 				</form>
-			</div>
-			<div className='text-center'>
-				<p>
-					latitude: {location.latitude} longitude: {location.longitude}
-				</p>
 			</div>
 		</div>
 	);

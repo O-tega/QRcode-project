@@ -10,7 +10,7 @@ import { addDoc, collection, onSnapshot } from 'firebase/firestore';
 import Qrcode from './Qrcode';
 
 const Registeration = () => {
-	// const createForm = CreateForm()
+
 	const navigate = useNavigate();
 	const [error, setError] = useState('');
 	const [input, setInput] = useState('');
@@ -18,6 +18,7 @@ const Registeration = () => {
 	const [getEmail, setGetemail] = useState('');
 	const [infoList, setInfoList] = useState([]);
 	const [isLoading, setLoading] = useState(false);
+
 
 	const handleInput = (e) => {
 		setInput(e.target.value);
@@ -44,7 +45,6 @@ const Registeration = () => {
 					const data = await addDoc(collectionRef, values);
 					const response = data;
 					setId(response.id);
-					navigate('/signin');
 				} catch (error) {
 					console.log(error);
 				}
@@ -54,10 +54,15 @@ const Registeration = () => {
 		},
 	});
 	console.log(error);
-	const getEmail1 = infoList.find((list) => list.email == input);
+	// console.log(infoList.length)
+	if(infoList.length !=0){
 
-	// Set to allow info from the db to render then set mail
-	setTimeout(() => setGetemail(getEmail1.email), 50);
+		const getEmail1 = infoList.find((list) => list.email == input);
+
+		// Set to allow info from the db to render then set mail
+		setTimeout(() => setGetemail(getEmail1.email), 50);
+	}
+
 
 	console.log(getEmail);
 	console.log(input)
@@ -68,10 +73,10 @@ const Registeration = () => {
 
 	console.log(infoList);
 
+	console.log(getId)
 	const prodInfoList = () => {
 		const productCollectionRef = collection(db, 'projectList');
 		onSnapshot(productCollectionRef, (snapshot) => {
-			setLoading(true);
 			let products = [];
 			let docId = [];
 			let newProduct;
@@ -81,8 +86,9 @@ const Registeration = () => {
 				return (newProduct = docId.map((id, index) => ({ ...id, ...products[index] })));
 			});
 			console.log(docId);
-			setInfoList(newProduct);
-			setLoading(false);
+			if(newProduct.length!= "undefined"){
+				setInfoList(newProduct);
+			}
 		});
 	};
 	return (
@@ -160,16 +166,22 @@ const Registeration = () => {
 									onChange={formik.handleChange}
 								/>
 							</div>
-							<button
-								type='submit'
-								className='bg-sky-700 hover:bg-sky-900 w-full text-center text-white font-bold rounded py-2'>
-								{isLoading ? <CircularProgress color='primary' size={20} /> : <p>Sign Up</p>}
-							</button>
+							{getId ? (
+								""
+							) : (
+								<button
+									type='submit'
+									className='bg-sky-700 hover:bg-sky-900 w-full text-center text-white font-bold rounded py-2'>
+									{isLoading ? <CircularProgress color='primary' size={20} /> : <p>Submit</p>}
+								</button>
+							)}
 						</form>
 					</div>
 				</div>
-				<Qrcode getId={getId} />
-				<Outlet />
+				{getId?
+					<Qrcode getId={getId}/>:""
+	
+				}
 			</div>
 		</Fragment>
 	);
